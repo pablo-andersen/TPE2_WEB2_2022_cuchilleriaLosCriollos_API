@@ -1,0 +1,217 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  text-align: center;
+  justify-content: center;
+  font-size: medium;
+
+  background-color: rgb(230, 215, 175);
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+  background-color: #fff;
+}
+
+.loggedUser {
+  display: block;
+  width: 100%;
+  text-align: right;
+}
+
+header {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 100%;
+  justify-content: center;
+}
+
+#logo {
+  width: 60%;
+  max-width: 400px;
+}
+
+nav {
+  background-color: rgb(230, 215, 175);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.admin,
+.admin a {
+  justify-content: end;
+  align-items: center;
+}
+
+nav ul,
+nav span {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+span#admin.material-icons {
+  font-size: 2.5em;
+}
+
+div.admin a,
+div.admin a:visited {
+  color: rgb(92, 84, 77);
+  outline: none;
+  align-items: center;
+  text-decoration: none;
+}
+
+nav ul li {
+  width: 100%;
+  display: block;
+  padding: 0px;
+}
+
+nav ul li a {
+  width: 100%;
+  color: rgb(92, 84, 77);
+  display: block;
+  text-decoration: none;
+  padding: 10px 0;
+}
+
+nav ul li a:hover {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+}
+
+.itemMenuMobile {
+  display: block;
+}
+
+footer {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 2em;
+  color: rgb(92, 84, 77);
+  display: flex;
+  align-items: center;
+  background-color: rgba(92, 84, 77, 0.6);
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 3% 5%;
+}
+
+footer a,
+a,
+a:visited {
+  text-decoration: none;
+  color: rgb(92, 84, 77);
+}
+
+.datosContactoPie ul li {
+  width: 100%;
+  list-style: none;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+
+#logoInsta {
+  width: 1.5em
+}
+
+.thumbnail {
+  max-width: 160px;
+}
+
+.linkCategory {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  margin-top: 50px;
+  border-radius: 3%;
+  
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.linkCategory:hover::after {
+  transform: translateY(0);
+}
+
+.linkCategory::after {
+
+  font-size: 2rem;
+  color: #FFF;
+  background-color: #AA774450;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform: translateY(100%);
+  transition: transform .3s;
+}
+
+.cuchillos{
+  background-image: url("../img/cuchillos.png");
+}
+.cuchillos::after {
+content: "CUCHILLOS";
+}
+
+@media only screen and (min-width: 480px) {
+
+  header {
+    display: flex;
+  }
+
+  .logo {
+    width: 10vw;
+  }
+
+  #logo {
+    width: 80%;
+  }
+
+  nav {
+    display: flex;
+  }
+
+  nav ul {
+    display: inline-flex;
+    flex-wrap: nowrap;
+  }
+
+  nav ul li {
+    width: auto;
+    display: inline-block;
+    padding: 0 30px;
+  }
+
+  nav ul li a {
+    padding: 15px;
+  }
+
+  footer {
+    flex-wrap: nowrap;
+    padding: 1% 10%;
+  }
+
+}
