@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2022 a las 12:45:43
+-- Tiempo de generación: 18-10-2022 a las 04:45:15
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -42,9 +42,7 @@ INSERT INTO `categorias` (`id`, `categoria`, `segmento`) VALUES
 (2, 'Juegos', 'Oro'),
 (3, 'Parrilleros', 'Plata'),
 (4, 'Materos', 'Bronce'),
-(22, 'Categoria 1', 'Bronce'),
-(23, 'Categoria 2', 'Plata'),
-(24, 'Categoria 3', 'Oro');
+(22, 'Categoria 1', 'Bronce');
 
 -- --------------------------------------------------------
 
@@ -125,13 +123,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
