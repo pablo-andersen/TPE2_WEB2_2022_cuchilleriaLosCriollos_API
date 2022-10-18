@@ -4,7 +4,6 @@
 require_once 'libs/smarty/libs/Smarty.class.php';
 require_once 'app/controllers/categoryController.php';
 require_once 'app/controllers/productController.php';
-require_once 'app/controllers/adminController.php';
 require_once 'app/controllers/loginController.php';
 require_once 'app/controllers/homeController.php';
 
@@ -20,7 +19,6 @@ if (!empty($_GET['action'])) {
 
 $categoryController = new CategoryController();
 $productController = new ProductController();
-$adminController = new AdminController();
 $loginController = new LoginController();
 $homeController = new HomeController();
 

@@ -12,9 +12,9 @@
 <body>
     <div class="container">
         <header>            
-            {if $isAdmin}
-                <div class="loggedUser"><span>Usuario logueado como: {$smarty.session.email}</span></div>
-            {/if}
+            
+                <div class="loggedUser">{if $isAdmin}<span>Usuario logueado como: {$smarty.session.email}</span>{/if}</div>
+            
             <nav>
                 <div class="logo">
                     <img src="templates/img/logo.png" id="logo" alt="logo de Los Criollos" />

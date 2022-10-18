@@ -52,7 +52,17 @@ class CategoryModel{
     }
 
     function deleteCategory($id){
-        $query = $this->db->prepare('DELETE FROM categorias WHERE categorias.id = ?');
-        $query->execute([$id]);
+        try {
+            $query = $this->db->prepare('DELETE FROM categorias WHERE categorias.id = ?');
+            $query->execute([$id]);
+            $result = "El registro fue eliminado correctamente.";
+            return $result;
+        }
+        catch (Exception $e){
+            $result = "No se pudo eliminar la categoría seleccionada. Para poder hacerlo, no debe existir ningún producto asociado a esta categoría.";
+            return $result;
+            die;
+        }
+        
     }
 }

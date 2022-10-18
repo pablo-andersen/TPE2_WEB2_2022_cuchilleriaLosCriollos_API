@@ -52,7 +52,7 @@ class ProductController{
     function addProduct(){
         $this->authHelper->isLoggedIn();
         // Proceso la imagen recibida del formulario en el arreglo $_FILES, para subirla a la base de datos (campo de tipo LONGBLOB)
-        $imagen_subida = 'uploaded_files/'. uniqid() . basename($_FILES['imagen']['name']);
+        $imagen_subida = 'uploaded_files/'. uniqid() . basename($_FILES['imagen']['name']); 
         $type= $_FILES['imagen']['type'];
         //Valido que el archivo se haya cargado correctamente y sea una imagen válida.
         if ((move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen_subida)) && ($type == "image/jpeg" || $type == "image/jpg" || $type == "image/png" || $type == "image/gif")) {

@@ -15,5 +15,11 @@ class HomeView{
     function showLoginLocation(){
         header('Location:'.BASE_URL.'login');
     }
-
+    
+    function showResult($admin, $result, $link){
+        $this->smarty->assign('isAdmin', $admin);
+        $this->smarty->assign('result', $result);
+        $this->smarty->assign('link', $link);
+        $this->smarty->display('showResult.tpl');
+    }
 }

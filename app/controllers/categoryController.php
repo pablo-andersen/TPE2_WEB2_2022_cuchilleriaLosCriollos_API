@@ -83,8 +83,10 @@ class CategoryController{
 
     function deleteCAtegory($id) {
         $this->authHelper->isLoggedIn();
-        $this->categoryModel->deleteCategory($id);
-        $this->showCategories();
+        $admin = $this->authHelper->checkLoggedIn();
+        $result = $this->categoryModel->deleteCategory($id);
+        $link = BASE_URL . 'category/list';
+        $this->categoryView->showResult($admin, $result, $link);
     }
-    
+
 }
