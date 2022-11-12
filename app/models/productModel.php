@@ -24,13 +24,13 @@ class ProductModel {
 
     function getAllWithFilter($order, $orderMode, $elements, $startAt, $filterBy, $equalTo){
         $query = $this->db->prepare("SELECT productos.*, categorias.categoria 
-                                     FROM productos p
-                                     JOIN categorias c 
-                                     ON p.id_categoria = c.id 
-                                     WHERE ? = ?
+                                     FROM productos
+                                     JOIN categorias
+                                     ON productos.id_categoria = categorias.id 
+                                     WHERE $filterBy = ?
                                      ORDER BY $order $orderMode
                                      LIMIT $elements OFFSET $startAt");
-        $query->execute([$filterBy, $equalTo]);
+        $query->execute([$equalTo]);
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
     }

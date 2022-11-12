@@ -97,10 +97,10 @@ class ProductApiController{
 
                             //Asigna un valor $filter para pasar al modelo en funcion del campo por el que se quiere ordenar
                             if ($filterBy == 'categoria') {
-                                $filter = 'categoria.categoria';
+                                $filter = 'categorias.categoria';
                             }
                             else {
-                                $filter = 'producto'.$filterBy;
+                                $filter = 'productos'.$filterBy;
                             }
                             
                             //Obtiene todos los productos del modelo y pasa los parametros de ordenamiento, paginado y filtrado.
