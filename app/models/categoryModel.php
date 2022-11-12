@@ -9,12 +9,21 @@ class CategoryModel{
     /** Función que abre la conexión a la base de datos*/
   
 
-    function getAll(){
+    function getAll($filterBy, $equalTo, $orderBy, $orderMode){
+        $query = 'SELECT * FROM categorias';
+        if ($filterBy) {
+            $query = $query . ' WHERE = ' . $filterBy . ' = ' . $equalTo;
+        }
+        if ($orderBy){
+            $query = $query . ' ORDER BY ' . $orderBy;
+        }
+        if ($orderMode) {
+            $query = $query . ' ' . $orderMode;
+        }
+        $queryDB = $this->db->prepare($query);
+        $queryDB->execute();
 
-        $query = $this->db->prepare('SELECT * FROM categorias');
-        $query->execute();
-
-        $categories = $query->fetchAll(PDO::FETCH_OBJ);
+        $categories = $queryDB->fetchAll(PDO::FETCH_OBJ);
 
         return $categories;
     }
@@ -46,9 +55,9 @@ class CategoryModel{
         return $this->db->lastInsertId();
     }
 
-    function updateCategory($id, $category, $segment) {
+    function updateCategory($id, $category) {
         $query = $this->db->prepare('UPDATE categorias SET categoria = ?, segmento = ? WHERE categorias.id = ?');
-        $query->execute([$category, $segment, $id]);
+        $query->execute([$category->categoria, $category->segmento, $id]);
     }
 
     function deleteCategory($id){
