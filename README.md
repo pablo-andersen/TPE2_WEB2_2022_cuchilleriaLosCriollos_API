@@ -8,11 +8,11 @@ todo momento.
 Accesible mediante la dirección web http://localhost/WEB2/TPE2-REST/api/
 
 - Debe especificarse de manera obligatoria un recurso en formato:
-http://localhost/WEB2/TPE2-REST/api/**recurso**  
+http://localhost/WEB2/TPE2-REST/api/recurso  
 _(ver detalle de recursos en el punto siguiente)_. 
 
 - Opcionalmente se puede especificar a continuación el id de un recurso en particular con el siguiente formato:
-http://localhost/WEB2/TPE2-REST/api/**recurso**/**id**  
+http://localhost/WEB2/TPE2-REST/api/recurso/id  
 _(ver detalle de recursos en el punto siguiente)_. 
 
 ###  RECURSOS
