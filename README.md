@@ -137,6 +137,10 @@ http://localhost/WEB2/TPE2-REST/api/products/27
 
 Al finalizar una transacción con la API exitosamente, la misma devuelve el registro creado/modificado/eliminado o una colección de registros según corresponda.
 
+Ejemplo de error en la consulta:
+
+- Código de respuesta 404: "El producto con el id 29 no existe"  
+
 
 
 
