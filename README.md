@@ -16,19 +16,43 @@ http://localhost/WEB2/TPE2-REST/api/_<recurso|OBLIGATORIO>/<id|OPCIONAL>_
 ###  RECURSOS
 Actualmente están disponibles para consulta mediante nuestra API los siguientes recursos:
 
-- :point_right: products
+:point_right: products
 
-- :point_right: categories
+:point_right: categories
 
 ```
 Nota: Si se agrega un id numérico, la consulta devuelve el detalle del recurso especificado que coincide con el id especificado.
 ```
 
 ###  PARAMETROS
+Los parámetros disponiblesy opcionales para acceder a consultas de la API son los siguientes: 
 
+- **orderBy** indica que los resultados serán visualizados de forma ordenada por el campo que sea especificado por el usuario. Se debe ingresar en formato minúsculas y coincidir exactamente con el nombre de una columna de la tabla del ***recurso*** en la base de datos. De lo contrario la consulta arroja un error. Por defecto, los resultados se muestran ordenados alfabéticamente por la denominación del ***recurso***. Se utiliza combinado con el valor del parámetro **orderMode**.
+- **orderMode** especifica si los resultados se muestran en orden ascendente o descendente. Puede tomar solamente los valores *ASC* y *DESC*. Por defecto, los resultados se muestran ordenados ascendentemente. 
+- **page** Este parámetro se utiliza en combinación con el parámetro **elements**. En caso de indicarse en la consulta, debe tomar el valor de un número entero mayor 0 (cero). Por defecto la consulta devuelve la primera página. 
+- **elements** En caso de indicarse en la consulta, debe tomar el valor de un número entero mayor a 0 (cero). Por defecto la consulta devuelve los resultados paginados de a 5 elementos por página.
+- **filterBy** indica el nombre de una columna de la tabla del ***recurso*** en la base de datos por la cual se filtrarán los resultados. Se debe ingresar en formato minúsculas y coincidir exactamente con el nombre de una columna de la tabla del ***recurso*** en la base de datos. De lo contrario la consulta arroja un error. No tiene valor por defecto. En caso de que no se indique, los resultados de la consulta no son filtrados, recupera todos los registros que cumplan con los criterios de consulta. Se utiliza combinado con el valor del parámetro **equalTo**.
+- **equalTo** contiene el valor por el cual serán filtrados los resultados de la consulta. Si no hay ningún registro que coincida con este valor, el resultado de la consulta es un objeto vacío (no devuelve error). 
 
 ###  CONSULTAS
-Al consultar los recursos, obtendrá información detallada de cada uno de ellos.
+Al consultar los recursos, obtendrá la siguiente información detallada de cada uno de ellos, 
+
+EJEMPLO RECURSO categories
+{
+    "id": 1,
+    "categoria": "Cuchillos",
+    "segmento": "Bronce"
+}
+EJEMPLO RECURSO products
+{
+    "id": 27,
+    "nombre": "Bombilla",
+    "descripcion": "Bombilla de alpaca grabada a mano",
+    "imagen": "uploaded_files/634c7e9f6b1faWhatsApp Image 2022-10-16 at 18.44.08.jpeg",
+    "precio": 350,
+    "id_categoria": 4,
+    "categoria": "Materos"
+}
 
 ###  RESULTADOS 
 
