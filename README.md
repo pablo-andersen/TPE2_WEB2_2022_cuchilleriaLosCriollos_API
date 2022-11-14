@@ -37,6 +37,9 @@ Los parámetros disponibles y opcionales para acceder a consultas de la API son 
 - **equalTo** contiene el valor por el cual serán filtrados los resultados de la consulta. Si no hay ningún registro que coincida con este valor, el resultado de la consulta es un objeto vacío (no devuelve error). 
 
 ###  CONSUMO DE LA API
+Están disponibles para su utilización en esta API los métodos GET, POST, PUT y DELETE permitiendo realizar la totalidad de las operaciones de ABM en la base de datos. 
+
+##### Metodo GET
 
 Al consultar los recursos con el método GET, obtendrá la siguiente información detallada de cada uno de ellos, 
 
@@ -62,9 +65,11 @@ Ejemplo de una consulta GET sobre el recurso ***products*** con id = 27
     "categoria": "Materos"
 }
 ```
-
-En el caso de no especificar un id, se obtendrá la colección de recursos, según los parámetros opcionales especificados 
+```
+Nota: En el caso de no especificar un id, se obtendrá la colección de recursos, según los parámetros opcionales especificados 
 _(ver detalle de parámetros en punto anterior)_
+```
+##### Metodo POST
 
 Para realizar una inserción de elemento con el método POST, se debe especificar la siguiente información en formato JSON, según el recurso correspondiente:
 
@@ -88,10 +93,49 @@ Ejemplo de método POST sobre el recurso ***products***.
     "id_categoria": 4,
 }
 ```
+##### Metodo PUT
 
-###  RESULTADOS 
+Para realizar una modificación sobre un recurso, debe conocer su ***id***, de lo contrario no podrá actualizar la información. 
 
-###  ERRORES
+
+Para realizar una modificación de elemento con el método PUT, se debe especificar la siguiente información en formato JSON, según el recurso correspondiente:
+
+Ejemplo de método PUT sobre el recurso ***categories***.
+
+```
+{
+    "id": 1,
+    "categoria": "Cuchillos",
+    "segmento": "Bronce"
+}
+```
+
+Ejemplo de método PUT sobre el recurso ***products***.
+
+```
+{
+    "id": 27,
+    "nombre": "Bombilla",
+    "descripcion": "Bombilla de alpaca grabada a mano",
+    "imagen": "uploaded_files/634c7e9f6b1faWhatsApp Image 2022-10-16 at 18.44.08.jpeg",
+    "precio": 350,
+    "id_categoria": 4,
+}
+##### Metodo DELETE
+
+La API permite la eliminación de un recurso, para lo cual se debe conocer el id del recurso a eliminar y especificalo en el endpoint. 
+
+Ejemplo de método DELETE que elimina el registro id= 27 del recurso ***products***.
+
+```
+http://localhost/WEB2/TPE2-REST/api/products/27
+```
+
+###  RESULTADOS / ERRORES
+
+Al finalizar una transacción con la API exitosamente, la misma devuelve el registro creado/modificado/eliminado o una colección de registros según corresponda.
+
+
 
 
 ### TPE1_WEB2_2022_cuchilleriaLosCriollos - Datos de autenticación
