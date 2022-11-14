@@ -121,6 +121,8 @@ Ejemplo de método PUT sobre el recurso ***products***.
     "precio": 350,
     "id_categoria": 4,
 }
+```
+
 ##### Metodo DELETE
 
 La API permite la eliminación de un recurso, para lo cual se debe conocer el id del recurso a eliminar y especificalo en el endpoint. 
