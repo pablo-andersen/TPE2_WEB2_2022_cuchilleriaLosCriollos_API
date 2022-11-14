@@ -1,10 +1,10 @@
-# Documentacion API - **[L]**os **[C]**riollos || **[C]**uchillería **[A]**rtesanal
+# Documentacion API - Los Criollos || Cuchillería Artesanal
 
-## |1| DESCRIPCION
+####  DESCRIPCION
     Esta es una API RESTful vinculada a la base de datos de nuestra cuchillería tandilense, detallando todos los productos que tenemos disponibles. Esta herramienta es útil para acceder a nuestro catálogo actualizado en 
     todo momento.    
 
-## |2| URI
+####  URI
     Accesible mediante la dirección web http://localhost/WEB2/TPE2-REST/api/
     
     Debe especificarse de manera obligatoria un recurso en formato:
@@ -13,7 +13,7 @@
     Opcionalmente se puede especificar a continuación el id de un recurso en particular con el siguiente formato:
     http://localhost/WEB2/TPE2-REST/api/_<recurso|OBLIGATORIO>/<id|OPCIONAL>_
 
-## |3| RECURSOS
+####  RECURSOS
     Actualmente están disponibles para consulta mediante nuestra API los siguientes recursos:
 
     - :point_right:<products>
@@ -24,17 +24,16 @@
     **Nota:** _Si se agrega un id numérico, la consulta devuelve el detalle del recurso especificado que coincide con el id especificado_.
     ´´´
 
-## |4| PARAMETROS
+####  PARAMETROS
 
 
-## |5| CONSULTAS
+####  CONSULTAS
     Al consultar los recursos, obtendrá información detallada de cada uno de ellos.
 
-## |6| RESULTADOS 
+####  RESULTADOS 
 
-## |7| ERRORES
+####  ERRORES
 
-## |8|
 
 # TPE1_WEB2_2022_cuchilleriaLosCriollos - Datos de autenticación
 
