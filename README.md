@@ -8,10 +8,12 @@ todo momento.
 Accesible mediante la dirección web http://localhost/WEB2/TPE2-REST/api/
 
 - Debe especificarse de manera obligatoria un recurso en formato:
-http://localhost/WEB2/TPE2-REST/api/_<recurso|OBLIGATORIO>_ _(ver detalle de recursos en el punto |3|)_. 
+http://localhost/WEB2/TPE2-REST/api/<recurso|OBLIGATORIO> 
+_(ver detalle de recursos en el punto siguiente)_. 
 
 - Opcionalmente se puede especificar a continuación el id de un recurso en particular con el siguiente formato:
-http://localhost/WEB2/TPE2-REST/api/_<recurso|OBLIGATORIO>/<id|OPCIONAL>_
+http://localhost/WEB2/TPE2-REST/api/<recurso|OBLIGATORIO>/<id|OPCIONAL> 
+_(ver detalle de recursos en el punto siguiente)_. 
 
 ###  RECURSOS
 Actualmente están disponibles para consulta mediante nuestra API los siguientes recursos:
@@ -25,7 +27,7 @@ Nota: Si se agrega un id numérico, la consulta devuelve el detalle del recurso 
 ```
 
 ###  PARAMETROS
-Los parámetros disponiblesy opcionales para acceder a consultas de la API son los siguientes: 
+Los parámetros disponibles y opcionales para acceder a consultas de la API son los siguientes: 
 
 - **orderBy** indica que los resultados serán visualizados de forma ordenada por el campo que sea especificado por el usuario. Se debe ingresar en formato minúsculas y coincidir exactamente con el nombre de una columna de la tabla del ***recurso*** en la base de datos. De lo contrario la consulta arroja un error. Por defecto, los resultados se muestran ordenados alfabéticamente por la denominación del ***recurso***. Se utiliza combinado con el valor del parámetro **orderMode**.
 - **orderMode** especifica si los resultados se muestran en orden ascendente o descendente. Puede tomar solamente los valores *ASC* y *DESC*. Por defecto, los resultados se muestran ordenados ascendentemente. 
@@ -38,12 +40,17 @@ Los parámetros disponiblesy opcionales para acceder a consultas de la API son l
 Al consultar los recursos, obtendrá la siguiente información detallada de cada uno de ellos, 
 
 EJEMPLO RECURSO categories
+```
 {
     "id": 1,
     "categoria": "Cuchillos",
     "segmento": "Bronce"
 }
+```
+
 EJEMPLO RECURSO products
+
+```
 {
     "id": 27,
     "nombre": "Bombilla",
@@ -53,7 +60,7 @@ EJEMPLO RECURSO products
     "id_categoria": 4,
     "categoria": "Materos"
 }
-
+```
 ###  RESULTADOS 
 
 ###  ERRORES
