@@ -36,10 +36,11 @@ Los parámetros disponibles y opcionales para acceder a consultas de la API son 
 - **filterBy** indica el nombre de una columna de la tabla del ***recurso*** en la base de datos por la cual se filtrarán los resultados. Se debe ingresar en formato minúsculas y coincidir exactamente con el nombre de una columna de la tabla del ***recurso*** en la base de datos. De lo contrario la consulta arroja un error. No tiene valor por defecto. En caso de que no se indique, los resultados de la consulta no son filtrados, recupera todos los registros que cumplan con los criterios de consulta. Se utiliza combinado con el valor del parámetro **equalTo**.
 - **equalTo** contiene el valor por el cual serán filtrados los resultados de la consulta. Si no hay ningún registro que coincida con este valor, el resultado de la consulta es un objeto vacío (no devuelve error). 
 
-###  CONSULTAS
-Al consultar los recursos, obtendrá la siguiente información detallada de cada uno de ellos, 
+###  CONSUMO DE LA API
 
-EJEMPLO RECURSO categories
+Al consultar los recursos con el método GET, obtendrá la siguiente información detallada de cada uno de ellos, 
+
+Ejemplo de una consulta GET sobre el recurso ***categories*** con id = 1
 ```
 {
     "id": 1,
@@ -48,7 +49,7 @@ EJEMPLO RECURSO categories
 }
 ```
 
-EJEMPLO RECURSO products
+Ejemplo de una consulta GET sobre el recurso ***products*** con id = 27
 
 ```
 {
@@ -61,6 +62,33 @@ EJEMPLO RECURSO products
     "categoria": "Materos"
 }
 ```
+
+En el caso de no especificar un id, se obtendrá la colección de recursos, según los parámetros opcionales especificados 
+_(ver detalle de parámetros en punto anterior)_
+
+Para realizar una inserción de elemento con el método POST, se debe especificar la siguiente información en formato JSON, según el recurso correspondiente:
+
+Ejemplo de método POST sobre el recurso ***categories***.
+
+```
+{
+    "categoria": "Cuchillos",
+    "segmento": "Bronce"
+}
+```
+
+Ejemplo de método POST sobre el recurso ***products***.
+
+```
+{
+    "nombre": "Bombilla",
+    "descripcion": "Bombilla de alpaca grabada a mano",
+    "imagen": "uploaded_files/634c7e9f6b1faWhatsApp Image 2022-10-16 at 18.44.08.jpeg",
+    "precio": 350,
+    "id_categoria": 4,
+}
+```
+
 ###  RESULTADOS 
 
 ###  ERRORES
