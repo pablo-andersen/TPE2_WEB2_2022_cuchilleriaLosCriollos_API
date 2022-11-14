@@ -15,9 +15,9 @@ class ProductModel {
         ORDER BY $order  $orderMode
         LIMIT $elements 
         OFFSET $startAt");
+        
         $query->execute();
         $products = $query->fetchAll(PDO::FETCH_OBJ);
-        // var_dump($products);
         return $products;
 
     }

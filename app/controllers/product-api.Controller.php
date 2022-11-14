@@ -25,7 +25,6 @@ class ProductApiController{
         return json_decode($this->data);
     }
 
-
     /**Si no viene un id por parámetro, obtiene un JSON arreglo de objetos JSON con todos los productos que existen en la base de datos.
      * Si viene un id por parametro, lo almacena en $id y luego obtiene, del modelo, el producto correspondiente a ese id.
      */
@@ -107,7 +106,7 @@ class ProductApiController{
                             $result = $this->productModel->getAllWithFilter($order, $orderMode, $elements, $startAt, $filter, $equalTo);
 
                             //Verifica si la consulta se realizó correctamente
-                            if($result){
+                            if(isset($result)){
 
                                 //Verifica si el resultado de la consulta está vacío.
                                 if (empty($result)) {
@@ -135,10 +134,8 @@ class ProductApiController{
 
                        //Obtiene todos los productos del modelo y pasa los parametros de ordenamiento y paginado.
                         $result = $this->productModel->getAll($order, $orderMode, $elements, $startAt);
-                        //var_dump($result);
                         $this->view->response($result,200);
-                    }
-                    
+                    }                    
                 }  
                 else {
                     //Informa error de parámetro no válido

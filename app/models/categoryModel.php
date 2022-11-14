@@ -9,24 +9,33 @@ class CategoryModel{
     /** Función que abre la conexión a la base de datos*/
   
 
-    function getAll($filterBy, $equalTo, $orderBy, $orderMode){
-        $query = 'SELECT * FROM categorias';
-        if ($filterBy) {
-            $query = $query . ' WHERE = ' . $filterBy . ' = ' . $equalTo;
-        }
-        if ($orderBy){
-            $query = $query . ' ORDER BY ' . $orderBy;
-        }
-        if ($orderMode) {
-            $query = $query . ' ' . $orderMode;
-        }
-        $queryDB = $this->db->prepare($query);
-        $queryDB->execute();
+    function getAll($order, $orderMode, $elements, $startAt){
+        $query = $this->db->prepare ("SELECT * 
+                  FROM categorias 
+                  ORDER BY $order $orderMode
+                  LIMIT $elements
+                  OFFSET $startAt");
+        
+        $query->execute();
 
-        $categories = $queryDB->fetchAll(PDO::FETCH_OBJ);
-
+        $categories = $query->fetchAll(PDO::FETCH_OBJ);
         return $categories;
     }
+
+    function getAllWithFilter($order, $orderMode, $elements, $startAt, $filterBy, $equalTo){
+        $query = $this->db->prepare ("SELECT * 
+        FROM categorias
+        WHERE $filterBy = ? 
+        ORDER BY $order $orderMode
+        LIMIT $elements
+        OFFSET $startAt");
+
+        $query->execute([$equalTo]);
+
+        $categories = $query->fetchAll(PDO::FETCH_OBJ);
+        return $categories;
+    }
+
 
     function getById($id) {
 
@@ -73,5 +82,13 @@ class CategoryModel{
             die;
         }
         
+    }
+
+    function getColumns(){
+        $query = $this->db->prepare('DESCRIBE categorias');
+        $query->execute();
+
+        $columns = $query->fetchAll(PDO::FETCH_OBJ);
+        return $columns;
     }
 }
