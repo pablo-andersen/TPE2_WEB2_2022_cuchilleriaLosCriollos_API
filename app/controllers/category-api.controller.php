@@ -2,7 +2,6 @@
 
 require_once 'app/models/categoryModel.php';
 require_once 'app/views/api-view.php';
-//require_once 'app/helpers/AuthHelper.php';
 
 
 class CategoryApiController{
@@ -10,12 +9,10 @@ class CategoryApiController{
     private $categoryModel;
     private $view;
     private $data;
-    //private $authHelper;
 
     function __construct(){
         $this->categoryModel = new CategoryModel();
         $this->view = new Apiview();  
-        //$this->authHelper = new AuthHelper(); 
 
         // lee el body del request
         $this->data = file_get_contents("php://input");
@@ -74,7 +71,7 @@ class CategoryApiController{
             
             // Verifica si los parámetros de ordenado son válidos
             if (in_array(strtolower($orderBy), $columns) && (strtolower($orderMode == "asc") || strtolower($orderMode == "desc"))){
-            
+
                 // Verifica si los parámetros de paginado son válidos
                 if((is_numeric($page) && $page>0) && (is_numeric($elements) && $elements>0)){
 
@@ -83,13 +80,12 @@ class CategoryApiController{
 
                     // Verifica si existen los parámetros de filtrado
                     if ($filterBy!=null && $equalTo!=null){
-
+          
                         //Verifica que el campo $filterBy exista en la tabla (comparando con $columns)
-                        if ($filterBy == 'categoria' || in_array(strtolower($filterBy), $columns)){
+                        if (in_array(strtolower($filterBy), $columns)){
                             
                             //Obtiene todas las categorías del modelo y pasa los parametros de ordenamiento, paginado y filtrado.
                             $result = $this->categoryModel->getAllWithFilter($orderBy, $orderMode, $elements, $startAt, $filterBy, $equalTo);
-                            // var_dump($result);//Verifica si la consulta se realizó correctamente
                             if(isset($result)){
 
                                 //Verifica si el resultado de la consulta está vacío.
@@ -97,7 +93,7 @@ class CategoryApiController{
                                     $this->view->response("La consulta realizada no arrojó resultados", 204);
                                 }
                                 else {
-
+                                    
                                     //Envía el/los producto/s a la vista para ser mostrado/s.
                                     $this->view->response($result, 200);
                                 }
@@ -114,11 +110,15 @@ class CategoryApiController{
                             $result = $this->view->response("Parámetro de filtrado no válido.", 400);
                         }
                     }
-                    else {
-                        
-                       //Obtiene todas las categorías del modelo y pasa los parametros de ordenamiento y paginado.
-                       $result = $this->categoryModel->getAll($orderBy, $orderMode, $elements, $startAt);
-                       $this->view->response($result,200);
+                    else {                        
+                        //Obtiene todas las categorías del modelo y pasa los parametros de ordenamiento y paginado.
+                        $result = $this->categoryModel->getAll($orderBy, $orderMode, $elements, $startAt);
+                        if (empty($result)) {
+                            $this->view->response("La consulta realizada no arrojó resultados", 204);
+                        }
+                        else {
+                        $this->view->response($result,200);
+                        }
                     }
                 }
                 else {
@@ -132,26 +132,8 @@ class CategoryApiController{
             }
         }
     }
-     
-    //Método que devuelve un arreglo con los nombres de las columnas de una tabla
-    function getHeaderColumns($params = null) {
-
-        //Se define un arreglo vacío para almacenar los nombres de las columnas.
-        $columns = [];
-
-        // Obtiene toda la información de las columnas de la tabla. Devuelve un arreglo de objetos con toda la info
-        $result = $this->categoryModel->getColumns();
-
-        //Recorre el arreglo y por cada elemento, extrae el nombre de la columna y lo agrega al arreglo $columns.
-        foreach ($result as $column) {
-            array_push($columns, $column->Field);
-        }
-        return $columns;
-    }
 
     function add($params=null) {
-        //$this->authHelper->isLoggedIn();
-        //$admin = $this->authHelper->checkLoggedIn();
         
         //Se obtiene el JSON con los datos a insertar.
         $body = $this->getBody();
@@ -171,8 +153,6 @@ class CategoryApiController{
     }
 
     function update($params=null) {
-        //$this->authHelper->isLoggedIn();
-        //$admin = $this->authHelper->checkLoggedIn();
 
         //Se obtiene el JSON con los datos modificados a insertar.
         $body = $this->getBody();
@@ -190,18 +170,21 @@ class CategoryApiController{
             }
         }     
     }
+         
+    //Método que devuelve un arreglo con los nombres de las columnas de una tabla
+    function getHeaderColumns($params = null) {
 
-    function delete($params=null) {
-        //$this->authHelper->isLoggedIn();
-        //$admin = $this->authHelper->checkLoggedIn();
+        //Se define un arreglo vacío para almacenar los nombres de las columnas.
+        $columns = [];
 
-        if ($params != null){
-            $id = $params[':ID'];
+        // Obtiene toda la información de las columnas de la tabla. Devuelve un arreglo de objetos con toda la info
+        $result = $this->categoryModel->getColumns();
+
+        //Recorre el arreglo y por cada elemento, extrae el nombre de la columna y lo agrega al arreglo $columns.
+        foreach ($result as $column) {
+            array_push($columns, $column->Field);
         }
-
-        $result = $this->categoryModel->deleteCategory($id);
-
-        $this->view->response($result, 200);
+        return $columns;
     }
 
 }

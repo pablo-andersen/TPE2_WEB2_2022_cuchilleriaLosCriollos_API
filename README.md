@@ -1,8 +1,10 @@
 # Documentacion API - Los Criollos || Cuchillería Artesanal
 
 ###  DESCRIPCION
-Esta es una API RESTful vinculada a la base de datos de nuestra cuchillería tandilense, detallando todos los productos que tenemos disponibles. Esta herramienta es útil para acceder a nuestro catálogo actualizado en 
-todo momento.    
+Esta es una API RESTful vinculada a la base de datos de nuestra cuchillería tandilense, detallando todos los productos que tenemos disponibles. Esta herramienta es útil para acceder a nuestro catálogo actualizado en todo momento.    
+
+### BASE DE DATOS
+Importar la base de datos desde el archivo cuchilleria_los_criollos.sql ubicado en la carpeta sql del repositorio.
 
 ###  URI
 Accesible mediante la dirección web http://localhost/WEB2/TPE2-REST/api/
@@ -122,17 +124,6 @@ Ejemplo de método PUT sobre el recurso ***products***.
     "id_categoria": 4,
 }
 ```
-
-##### Metodo DELETE
-
-La API permite la eliminación de un recurso, para lo cual se debe conocer el id del recurso a eliminar y especificalo en el endpoint. 
-
-Ejemplo de método DELETE que elimina el registro id= 27 del recurso ***products***.
-
-```
-http://localhost/WEB2/TPE2-REST/api/products/27
-```
-
 ###  RESULTADOS / ERRORES
 
 Al finalizar una transacción con la API exitosamente, la misma devuelve el registro creado/modificado/eliminado o una colección de registros según corresponda.
@@ -141,13 +132,5 @@ Ejemplo de error en la consulta:
 
 - Código de respuesta 404: "El producto con el id 29 no existe"  
 
-
-
-
-### TPE1_WEB2_2022_cuchilleriaLosCriollos - Datos de autenticación
-
-user: admin@admin.com
-
-password: 123456
 
 

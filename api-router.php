@@ -4,7 +4,6 @@
 require_once './libs/Router.php';
 require_once 'app/controllers/category-api.controller.php';
 require_once 'app/controllers/product-api.controller.php';
-require_once 'app/controllers/user-api.Controller.php';
 
 //Se define la base de la URL para utilizar PrettyURL
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
@@ -21,8 +20,6 @@ $router->addRoute('categories', 'GET', 'CategoryApiController', 'get');
 $router->addRoute('categories/:ID', 'GET', 'CategoryApiController', 'get');
 //Insertar una categoria
 $router->addRoute('categories', 'POST', 'CategoryApiController', 'add');
-//Eliminar una categoria. Le debo pasar un id en el parámetro
-$router->addRoute('categories/:ID', 'DELETE', 'CategoryApiController', 'delete');
 //Editar una categoria. Le debo pasar un id en el parámetro
 $router->addRoute('categories/:ID', 'PUT', 'CategoryApiController', 'update');
 //Listar todos los productos
@@ -31,16 +28,8 @@ $router->addRoute('products', 'GET', 'ProductApiController', 'get');
 $router->addRoute('products/:ID', 'GET', 'ProductApiController', 'get');
 //Insertar un producto.
 $router->addRoute('products', 'POST', 'ProductApiController', 'add');
-//Eliminar un producto. Le debo pasar un parámetro.
-$router->addRoute('products/:ID', 'DELETE', 'ProductApiController', 'delete');
 //Editar un producto. Le debo pasar un parámetro
 $router->addRoute('products/:ID', 'PUT', 'ProductApiController', 'update');
-
-
-//Validar user mediante token
-$router->addRoute('users/token', 'GET', 'UserApiController', 'getToken');
-$router->addRoute('users/:ID', 'GET', 'UserApiController', 'getUser');
-
 
 // ejecuta la ruta (sea cual sea)
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

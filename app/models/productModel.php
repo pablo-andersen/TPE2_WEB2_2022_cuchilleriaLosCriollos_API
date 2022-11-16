@@ -17,6 +17,7 @@ class ProductModel {
         OFFSET $startAt");
         
         $query->execute();
+
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         return $products;
 
@@ -29,16 +30,17 @@ class ProductModel {
                                      ON productos.id_categoria = categorias.id 
                                      WHERE $filterBy = ?
                                      ORDER BY $order $orderMode
-                                     LIMIT $elements OFFSET $startAt");
+                                     LIMIT $elements 
+                                     OFFSET $startAt");
+
         $query->execute([$equalTo]);
         $products = $query->fetchAll(PDO::FETCH_OBJ);
+
         return $products;
     }
 
     function getById($id){
 
-
-        //$query = $this->db->prepare('SELECT * FROM productos WHERE id = '.$id);
         $query = $this->db->prepare ('SELECT productos.*, categorias.categoria FROM productos JOIN categorias ON productos.id_categoria = categorias.id WHERE productos.id = ?');
         $query->execute([$id]);
 
@@ -55,11 +57,6 @@ class ProductModel {
     function updateProduct($id, $product){
         $query = $this->db->prepare('UPDATE productos SET nombre = ?, descripcion = ?, imagen = ?, precio = ?, id_categoria = ? WHERE id = ?');
         $query->execute([$product->nombre, $product->descripcion, $product->imagen, $product->precio, $product->id_categoria, $id]);
-    }
-
-    function deleteProduct($id) {
-        $query = $this->db->prepare('DELETE FROM productos WHERE productos.id = ?');
-        $query->execute([$id]);
     }
 
     function getColumns(){

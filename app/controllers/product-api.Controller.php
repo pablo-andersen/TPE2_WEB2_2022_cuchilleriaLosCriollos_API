@@ -3,19 +3,16 @@
 require_once 'app/models/productModel.php';
 require_once 'app/models/categoryModel.php';
 require_once 'app/views/api-view.php';
-require_once 'app/helpers/AuthApiHelper.php';
 
 class ProductApiController{
 
     private $productModel;
     private $view;
     private $data;
-    private $authHelper;
 
     function __construct(){
         $this->productModel = new ProductModel();
         $this->view = new ApiView();
-        $this->authHelper = new AuthApiHelper(); 
         
         // lee el body del request
         $this->data = file_get_contents("php://input");        
@@ -134,7 +131,12 @@ class ProductApiController{
 
                        //Obtiene todos los productos del modelo y pasa los parametros de ordenamiento y paginado.
                         $result = $this->productModel->getAll($order, $orderMode, $elements, $startAt);
-                        $this->view->response($result,200);
+                        if (empty($result)) {
+                            $this->view->response("La consulta realizada no arrojó resultados", 204);
+                        }
+                        else {
+                            $this->view->response($result,200);
+                        }
                     }                    
                 }  
                 else {
@@ -150,7 +152,51 @@ class ProductApiController{
         }
     }
 
+    function add($params=null){
+           
+        //Se obtiene el JSON con los datos a insertar.
+        $body = $this->getBody();
+        
+        //Verifica que el JSON ingresado no contenga campos vacíos. 
+        if (empty($body->nombre) || 
+            empty($body->descripcion) || 
+            empty($body->imagen) || 
+            empty($body->precio) || 
+            empty($body->id_categoria)){
+            $this->view->response("Complete los datos", 400);
+        }
+        else {
+            //Inserta el JSON en la base de datos y almacena en $id el Id del producto insertado.
+            $id = $this->productModel->addProduct($body);
+            //Obtiene nuevamente el producto que acaba de insertar, para mostrarlo en la vista.
+            $product = $this->productModel->getById($id);
+            $this->view->response($product, 201);            
+        }           
+    }
 
+    function update($params=null){
+        //se obtiene el JSON con los datos modificados a insertar.
+        $body = $this->getBody();
+        
+        if ($params!=null){
+            $id = $params[':ID'];
+
+            //Obtiene el producto que se quiere editar. 
+            $product = $this->productModel->getById($id);
+
+            if ($product){
+                $this->productModel->updateProduct($id, $body);
+                $this->view->response('El producto se actualizó correctamente', 200);
+            }
+            else {
+                return $this->view->response('El producto con el id '.$id.' no existe.', 404);
+            }
+        }
+        else {
+            $this->view->response('Faltan parámetros. Por favor indique el id de la tarea a modificar.', 400);
+        }
+    }
+    
     //Método que devuelve un arreglo con los nombres de las columnas de una tabla
     function getHeaderColumns($params = null) {
 
@@ -166,79 +212,5 @@ class ProductApiController{
         }
         return $columns;
     }
-
-    function add($params=null){
-        // if (!$this->authHelper->isLoggedIn()) {
-        //     $this->view->response("Para efectuar esta operación debes loguearte", 401);
-        // }
-        // else {
-            
-            //Se obtiene el JSON con los datos a insertar.
-            $body = $this->getBody();
-            
-            //Verifica que el JSON ingresado no contenga campos vacíos. 
-            if (empty($body->nombre) || 
-                empty($body->descripcion) || 
-                empty($body->imagen) || 
-                empty($body->precio) || 
-                empty($body->id_categoria)){
-                $this->view->response("Complete los datos", 400);
-            }
-            else {
-                //Inserta el JSON en la base de datos y almacena en $id el Id del producto insertado.
-                $id = $this->productModel->addProduct($body);
-                //Obtiene nuevamente el producto que acaba de insertar, para mostrarlo en la vista.
-                $product = $this->productModel->getById($id);
-                $this->view->response($product, 201);            
-            }    
-        // }
-       
-    }
-
-    function update($params=null){
-        if (!$this->authHelper->isLoggedIn()) {
-            $this->view->response("Para efectuar esta operación debes loguearte", 401);
-        }
-        else {
-            //se obtiene el JSON con los datos modificados a insertar.
-            $body = $this->getBody();
-            
-            if ($params!=null){
-                $id = $params[':ID'];
-
-                //Obtiene el producto que se quiere editar. 
-                $product = $this->productModel->getById($id);
-
-                if ($product){
-                    $this->productModel->updateProduct($id, $body);
-                    $this->view->response('El producto se actualizó correctamente', 200);
-                }
-                else {
-                    return $this->view->response('El producto con el id '.$id.' no existe.', 404);
-                }
-            }
-        }
-    }
-
-    function delete($params=null) {
-        if (!$this->authHelper->isLoggedIn()) {
-            $this->view->response("Para efectuar esta operación debes loguearte", 401);
-        }
-        else {
-            if ($params != null) {
-                $id = $params[':ID'];
-                $result = $this->productModel->getById($id);
-                $this->productModel->deleteProduct($id);
-                if ($result){
-                    $this->view->response($result, 200);
-                }
-                else {
-                    $this->view->response('El producto con el id '.$id.' no se puede eliminar porque no existe', 404);
-                }
-            }
-            else {
-                $this->view->response('No se puede realizar la acción. Faltan parámetros', 400);
-            }
-        }
-    }
+    
 }
